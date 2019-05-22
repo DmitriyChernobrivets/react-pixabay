@@ -1,7 +1,7 @@
 import { FETCH_RECEIVED_DATA } from "../actions/actions";
 
 const IState = {
-  value: 2
+  value: ""
 };
 
 const main = (state = IState, { type, payload }) => {
