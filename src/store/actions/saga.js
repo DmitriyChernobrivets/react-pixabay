@@ -1,32 +1,19 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { api } from "../../services/api";
-import { FETCH_DATA, fetchReceivedData } from "./actions";
+import api from "../../services/api";
+import { fetchReceivedData, fetchError } from "./actions";
+import { FETCH_DATA } from "../../constants/ActionTypes";
 
-// worker Saga: will be fired on USER_FETCH_REQUESTED actions
-
-function* fetchProducts() {
+function* fetchImages() {
   try {
-    const products = yield call(api);
+    const products = yield call(api.fetchByCategory);
     yield put(fetchReceivedData(products));
   } catch (e) {
-    console.log(e);
+    yield put(fetchError(e));
   }
 }
 
-/*
-  Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
-  Allows concurrent fetches of user.
-*/
 function* mySaga() {
-  yield takeLatest(FETCH_DATA, fetchProducts);
+  yield takeLatest(FETCH_DATA, fetchImages);
 }
-
-/*
-  Alternatively you may use takeLatest.
-
-  Does not allow concurrent fetches of user. If "USER_FETCH_REQUESTED" gets
-  dispatched while a fetch is already pending, that pending fetch is cancelled
-  and only the latest one will be run.
-*/
 
 export default mySaga;

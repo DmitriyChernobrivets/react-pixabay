@@ -1,7 +1,8 @@
-const FETCH_DATA = "FETCH_DATA";
-const FETCH_RECEIVED_DATA = "FETCH_RECEIVED_DATA";
+import { FETCH_DATA, FETCH_RECEIVED_DATA, FETCH_ERROR } from "../../constants/ActionTypes";
 
 const fetchData = () => ({ type: FETCH_DATA });
-const fetchReceivedData = data => ({ type: FETCH_RECEIVED_DATA, payload: data });
+const fetchReceivedData = ({ data }) => ({ type: FETCH_RECEIVED_DATA, payload: data });
 
-export { FETCH_DATA, FETCH_RECEIVED_DATA, fetchData, fetchReceivedData };
+const fetchError = err => ({ type: FETCH_ERROR, payload: err });
+
+export { fetchData, fetchReceivedData, fetchError };

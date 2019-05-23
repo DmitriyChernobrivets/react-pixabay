@@ -1,13 +1,16 @@
-import { FETCH_RECEIVED_DATA } from "../actions/actions";
+import { FETCH_RECEIVED_DATA, FETCH_ERROR } from "../../constants/ActionTypes";
 
 const IState = {
-  value: ""
+  items: "",
+  error: null
 };
 
 const main = (state = IState, { type, payload }) => {
   switch (type) {
     case FETCH_RECEIVED_DATA:
-      return { ...state, value: payload };
+      return { items: payload, error: null };
+    case FETCH_ERROR:
+      return { ...state, error: payload };
     default:
       return state;
   }

@@ -2,25 +2,26 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchData } from "../store/actions/actions";
+import Header from "./Header/Header";
+import ItemList from "./Main/ItemList";
 
 class App extends Component {
-  onCl = () => {
+  componentDidMount() {
     this.props.fetchData();
-  };
+  }
   render() {
+    const { items } = this.props;
     return (
       <div className="App">
-        <header className="App-header">
-          <button onClick={this.onCl}>Click</button>
-          {this.props.value.hits && <img src={this.props.value.hits[0].largeImageURL} />}
-        </header>
+        <Header />
+        <ItemList pictures={items ? items.hits : null} />
       </div>
     );
   }
 }
 const state = state => {
   return {
-    value: state.main.value
+    items: state.main.items
   };
 };
 const dipatcher = dispatch => bindActionCreators({ fetchData }, dispatch);
