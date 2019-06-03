@@ -2,15 +2,13 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 
 const styles = theme => ({
   appBar: {
-    backgroundColor: "#008080",
-    justifyContent: "space-between"
+    backgroundColor: "#008080"
   },
   root: {
     width: "100%"
   },
-
-  selectEmpty: {
-    color: "#fff"
+  grow: {
+    flexGrow: 1
   },
   formControl: {
     margin: theme.spacing.unit,

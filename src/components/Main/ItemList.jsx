@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Card from "./Card";
 import styled from "styled-components";
+import InfiniteScroll from "react-infinite-scroller";
 
 const ListContainer = styled.div`
   font-size: 18px;
@@ -16,16 +17,26 @@ const ListContainer = styled.div`
 
 class ItemList extends Component {
   static propTypes = {
-    pictures: PropTypes.array
+    pictures: PropTypes.array.isRequired
   };
-
+  loadFunc = () => {};
   render() {
     const { pictures } = this.props;
-    console.log(pictures);
+    const items = pictures && pictures.map(picture => <Card picture={picture} key={picture.id} />);
     return (
-      <ListContainer>
-        {pictures && pictures.map(picture => <Card picture={picture} key={picture.id} />)}
-      </ListContainer>
+      <InfiniteScroll
+        pageStart={1}
+        loadMore={this.loadFunc}
+        hasMore={true || false}
+        loader={
+          <div className="loader" key={0}>
+            Loading ...
+          </div>
+        }
+        useWindow={false}
+      >
+        <ListContainer>{items}</ListContainer>
+      </InfiniteScroll>
     );
   }
 }

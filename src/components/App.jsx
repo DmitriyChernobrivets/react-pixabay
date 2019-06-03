@@ -1,32 +1,38 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchData } from "../store/actions/actions";
+import { fetchPictures } from "../store/actions/actions";
 import Header from "./Header/Header";
 import ItemList from "./Main/ItemList";
 
 class App extends Component {
+  static propTypes = {
+    fetchPictures: PropTypes.func
+  };
+
   componentDidMount() {
-    this.props.fetchData();
+    this.props.fetchPictures();
   }
   render() {
     const { items } = this.props;
+
     return (
       <div className="App">
         <Header />
-        <ItemList pictures={items ? items.hits : null} />
+        {items && <ItemList pictures={items} />}
       </div>
     );
   }
 }
-const state = state => {
+const mapStateToProps = state => {
   return {
-    items: state.main.items
+    items: state.pictures.items
   };
 };
-const dipatcher = dispatch => bindActionCreators({ fetchData }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ fetchPictures }, dispatch);
 
 export default connect(
-  state,
-  dipatcher
+  mapStateToProps,
+  mapDispatchToProps
 )(App);

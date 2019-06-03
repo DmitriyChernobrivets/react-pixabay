@@ -1,13 +1,13 @@
-import { FETCH_RECEIVED_DATA, FETCH_ERROR } from "../../constants/ActionTypes";
+import { RECEIVED_PICTURE, FETCH_ERROR } from "../../constants/ActionTypes";
 
 const IState = {
-  items: "",
+  items: null,
   error: null
 };
 
 const main = (state = IState, { type, payload }) => {
   switch (type) {
-    case FETCH_RECEIVED_DATA:
+    case RECEIVED_PICTURE:
       return { items: payload, error: null };
     case FETCH_ERROR:
       return { ...state, error: payload };

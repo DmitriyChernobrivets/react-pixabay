@@ -4,8 +4,8 @@ import config from "./apiConfig";
 const { API_KEY, URL } = config;
 
 const api = {
-  fetchByCategory: (category = "nature", itemsCount = 30) =>
-    axios.get(`${URL}?key=${API_KEY}&category=${category}&image_type=photo&per_page=${itemsCount}`)
+  fetchByCategory: (category, itemsCount = 30) =>
+    axios.get(`${URL}?key=${API_KEY}&category=food&image_type=photo&per_page=${itemsCount}`)
 };
 
 // const api = async () => {

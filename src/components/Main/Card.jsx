@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled, { keyframes } from "styled-components";
-import ImageZoom from "react-medium-image-zoom";
+import WitchTransition from "../../hocs/hocs";
+// import ImageZoom from "react-medium-image-zoom";
 import ImageContent from "./ImageContent";
 
 const rotate = keyframes`
@@ -16,12 +17,14 @@ const rotate = keyframes`
   }
 `;
 
-const Container = styled.div`
+const Container = WitchTransition(styled.div`
   margin: 0;
   position: relative;
   height: 250px;
   animation: ${rotate} 0.5s linear 1;
-`;
+  transition: 0.5s;
+  opacity: ${({ state }) => state === "entered" && 1};
+`);
 
 class Card extends Component {
   static propTypes = {
@@ -32,19 +35,9 @@ class Card extends Component {
     const { largeImageURL, tags, user, likes } = this.props.picture;
 
     return (
-      <Container bgimage={largeImageURL}>
+      <Container>
         <img src={largeImageURL} alt="1" />
-        {/* <ImageZoom
-          image={{
-            src: largeImageURL,
-            alt: "Golden Gate Bridge",
-            style: { height: "200px", cursor: "pointer" }
-          }}
-          zoomImage={{
-            src: largeImageURL,
-            alt: "Golden Gate Bridge"
-          }}
-        /> */}
+
         <ImageContent tags={tags} user={user} likes={likes} />
       </Container>
     );
