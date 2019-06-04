@@ -15,12 +15,12 @@ class App extends Component {
     this.props.fetchPictures();
   }
   render() {
-    const { items } = this.props;
+    const { items, fetchPictures } = this.props;
 
     return (
       <div className="App">
         <Header />
-        {items && <ItemList pictures={items} />}
+        {items && <ItemList pictures={items} loadMore={fetchPictures} />}
       </div>
     );
   }
@@ -30,6 +30,7 @@ const mapStateToProps = state => {
     items: state.pictures.items
   };
 };
+
 const mapDispatchToProps = dispatch => bindActionCreators({ fetchPictures }, dispatch);
 
 export default connect(

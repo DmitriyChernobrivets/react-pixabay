@@ -4,8 +4,10 @@ import config from "./apiConfig";
 const { API_KEY, URL } = config;
 
 const api = {
-  fetchByCategory: (category, itemsCount = 30) =>
-    axios.get(`${URL}?key=${API_KEY}&category=food&image_type=photo&per_page=${itemsCount}`)
+  fetchByCategory: (page = 1, category = "nature", type = "photo") =>
+    axios.get(
+      `${URL}?key=${API_KEY}&category=${category}&image_type=${type}&per_page=20&page=${page}`
+    )
 };
 
 // const api = async () => {
